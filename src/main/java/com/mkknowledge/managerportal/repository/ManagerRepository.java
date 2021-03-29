@@ -8,7 +8,7 @@ import com.mkknowledge.managerportal.model.Manager;
 
 public interface ManagerRepository extends JpaRepository<Manager, Long> {
 
-	Optional<Manager> findByUsername(String username);
+	Manager findByUsername(String username);
 	
 	Boolean existsByUsername(String username);
 
