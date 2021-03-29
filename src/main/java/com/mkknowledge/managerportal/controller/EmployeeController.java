@@ -32,6 +32,14 @@ public class EmployeeController {
 		return employeeService.listAll();
 	}
 	
+	@GetMapping("/employee/{id}")
+	public Employee getEmployee(@PathVariable(value = "id") Long id) {
+		Employee emp = employeeService.get(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
+		return emp;
+		
+	}
+	
 	@PostMapping
 	public Employee create(@RequestBody Employee user) {
 		return employeeService.save(user);
