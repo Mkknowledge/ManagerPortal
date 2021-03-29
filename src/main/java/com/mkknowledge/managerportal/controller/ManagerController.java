@@ -26,14 +26,13 @@ public class ManagerController {
 	/* @PreAuthorize("hasAnyRole('MANAGER')") */
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping("/manager/add")
-	public String addManager(@RequestBody Manager manager) {
+	public Manager addManager(@RequestBody Manager manager) {
 		
 		String password = manager.getPassword();
 		String encryptPwd = bCryptPasswordEncoder.encode(password);
 		
 		manager.setPassword(encryptPwd);
 		
-		managerRepository.save(manager);
-		return "Manager Added Successfully";
+		return managerRepository.save(manager);
 	}
 }

@@ -29,11 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.cors();
 		http.csrf().disable();
 		//URL Based Security for displaying list /employees/**
-		http.httpBasic().and().authorizeRequests().antMatchers("/secure/**").permitAll().and()
-		.authorizeRequests().antMatchers("/employees/**").permitAll().and()
 		//Role Based only accessable to Manager /secure/**
-		.authorizeRequests().antMatchers("/zzel/**").hasAnyRole("MANAGER").anyRequest().authenticated().and()
-		.formLogin().permitAll();
+		/*
+		 * http.httpBasic().and().authorizeRequests().antMatchers("/secure/**").
+		 * permitAll().and()
+		 * .authorizeRequests().antMatchers("/employees/**").permitAll().and()
+		 * .authorizeRequests().antMatchers("/zzel/**").hasAnyRole("MANAGER").anyRequest
+		 * ().authenticated().and() .formLogin().permitAll();
+		 */
 	}
 
 	@Bean
