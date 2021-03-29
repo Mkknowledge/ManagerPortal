@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.mkknowledge.managerportal.model.Manager;
 import com.mkknowledge.managerportal.repository.ManagerRepository;
 
+@Service
 public class ManagerDetailsService implements UserDetailsService{
 
 	@Autowired
@@ -24,10 +26,8 @@ public class ManagerDetailsService implements UserDetailsService{
 		}else {
 			throw new UsernameNotFoundException("Manager not found with name: " + username);
 		}
+		return managerDetails;
 		
-		
-		
-		return null;
 	}
 
 }

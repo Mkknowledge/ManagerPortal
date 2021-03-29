@@ -28,9 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		//URL Based Security for displaying list
-		http.authorizeRequests().antMatchers("/employees/**").authenticated().anyRequest().permitAll().and()
+		http.httpBasic().and().authorizeRequests().antMatchers("/employees/**").permitAll().and()
 		//Role Based only accessable to Manager
-		.authorizeRequests().antMatchers("/secure/**").authenticated().anyRequest().hasAnyRole("MANAGER").and()
+		.authorizeRequests().antMatchers("/secure/**").hasAnyRole("MANAGER").anyRequest().authenticated().and()
 		.formLogin().permitAll();
 	}
 

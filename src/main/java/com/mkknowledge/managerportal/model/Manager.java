@@ -72,7 +72,7 @@ public class Manager {
 	@JsonFormat(pattern="yyy-mm-dd")
 	private Date updated_At;
 	
-	@OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(	name = "user_roles", 
 		joinColumns = @JoinColumn(name = "user_id"), 
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
