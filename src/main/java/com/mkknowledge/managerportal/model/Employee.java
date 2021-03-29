@@ -57,11 +57,13 @@ public class Employee {
 	@Size(max = 20)
 	private String city;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(	name = "user_roles", 
-		joinColumns = @JoinColumn(name = "user_id"), 
-		inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	/*
+	 * @ManyToMany(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinTable( name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+	 * inverseJoinColumns = @JoinColumn(name = "role_id")) private Set<Role> roles =
+	 * new HashSet<>();
+	 */
 	
 	public Employee() {
 		
@@ -90,15 +92,13 @@ public class Employee {
 
 
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
+	/*
+	 * public Set<Role> getRoles() { return roles; }
+	 * 
+	 * 
+	 * 
+	 * public void setRoles(Set<Role> roles) { this.roles = roles; }
+	 */
 
 	
 	
@@ -163,7 +163,6 @@ public class Employee {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((mobile == null) ? 0 : mobile.hashCode());
-		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
 		return result;
 	}
 
@@ -216,11 +215,6 @@ public class Employee {
 			if (other.mobile != null)
 				return false;
 		} else if (!mobile.equals(other.mobile))
-			return false;
-		if (roles == null) {
-			if (other.roles != null)
-				return false;
-		} else if (!roles.equals(other.roles))
 			return false;
 		return true;
 	}

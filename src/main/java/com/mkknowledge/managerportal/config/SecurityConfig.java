@@ -26,11 +26,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.cors();
 		http.csrf().disable();
-		//URL Based Security for displaying list
-		http.httpBasic().and().authorizeRequests().antMatchers("/employees/**").permitAll().and()
-		//Role Based only accessable to Manager
-		.authorizeRequests().antMatchers("/secure/**").hasAnyRole("MANAGER").anyRequest().authenticated().and()
+		//URL Based Security for displaying list /employees/**
+		http.httpBasic().and().authorizeRequests().antMatchers("/secure/**").permitAll().and()
+		.authorizeRequests().antMatchers("/employees/**").permitAll().and()
+		//Role Based only accessable to Manager /secure/**
+		.authorizeRequests().antMatchers("/zzel/**").hasAnyRole("MANAGER").anyRequest().authenticated().and()
 		.formLogin().permitAll();
 	}
 
