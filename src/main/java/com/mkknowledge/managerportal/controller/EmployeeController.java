@@ -1,6 +1,5 @@
 package com.mkknowledge.managerportal.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +9,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.Optional;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import com.mkknowledge.managerportal.model.Employee;
 import com.mkknowledge.managerportal.service.EmployeeService;
@@ -40,6 +35,26 @@ public class EmployeeController {
 	@PostMapping
 	public Employee create(@RequestBody Employee user) {
 		return employeeService.save(user);
+	}
+	
+	@PutMapping("{id}")
+	public Employee updateEmployee(@PathVariable(value = "id") Long id, @RequestBody Employee empDetails) {
+
+		Employee emp = employeeService.get(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
+		
+		emp.setFirstname(empDetails.getFirstname());
+		emp.setLastname(empDetails.getLastname());
+		emp.setEmail(empDetails.getEmail());
+		emp.setAddress(empDetails.getAddress());
+		emp.setDob(empDetails.getDob());
+		emp.setMobile(empDetails.getMobile());
+		emp.setCity(empDetails.getCity());
+		emp.setRoles(empDetails.getRoles());
+		
+		Employee updateEmployee = employeeService.save(emp);
+		
+		return updateEmployee;
 	}
 
 	@DeleteMapping("/{id}")
