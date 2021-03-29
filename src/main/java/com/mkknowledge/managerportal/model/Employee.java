@@ -1,29 +1,108 @@
 package com.mkknowledge.managerportal.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import javax.persistence.JoinColumn;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity
+@Table( name = "employee",
+uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class Employee {
 	
-	private String empId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long empId;
+	
+	@NotBlank
+	@Size(max = 20)
 	private String firstname;
+	
+	@NotBlank
+	@Size(max = 20)
 	private String lastname;
+	
+	@NotBlank
+	@Size(max = 50)
+	@Email
+	private String email;
+	
+	@NotBlank
+	@Size(max = 120)
 	private String address;
+	
+	@JsonFormat(pattern="yyy-mm-dd")
 	private Date dob;
+	 
+	@NotBlank
+	@Size(max = 10)
 	private String mobile;
+	
+	@NotBlank
+	@Size(max = 20)
 	private String city;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "user_roles", 
+		joinColumns = @JoinColumn(name = "user_id"), 
+		inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 	
 	public Employee() {
 		
 	}
-
-	public String getEmpId() {
+	
+	public Long getEmpId() {
 		return empId;
 	}
 
-	public void setEmpId(String empId) {
+
+
+	public void setEmpId(Long empId) {
 		this.empId = empId;
 	}
 
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	
+	
 	public String getFirstname() {
 		return firstname;
 	}
