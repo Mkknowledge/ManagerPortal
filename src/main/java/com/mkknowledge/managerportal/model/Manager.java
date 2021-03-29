@@ -90,12 +90,11 @@ public class Manager {
 	
 	}
 	
-	public Manager(Long id, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 20) String username,
+	public Manager(@NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 20) String username,
 			@NotBlank @Size(max = 20) String firstName, @NotBlank @Size(max = 20) String lastName,
 			@NotBlank @Size(max = 120) String password, @NotBlank @Size(max = 120) String address, Date dob,
-			@NotBlank @Size(max = 20) String company, Date created_At, Date updated_At, Set<Role> roles) {
+			@NotBlank @Size(max = 20) String company) {
 		super();
-		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.firstName = firstName;
@@ -104,9 +103,6 @@ public class Manager {
 		this.address = address;
 		this.dob = dob;
 		this.company = company;
-		this.created_At = created_At;
-		this.updated_At = updated_At;
-		this.roles = roles;
 	}
 
 	public Long getId() {
