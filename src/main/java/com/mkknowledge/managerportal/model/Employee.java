@@ -27,7 +27,7 @@ public class Employee {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long empId;
+	private String empId;
 	
 	@NotBlank
 	@Size(max = 20)
@@ -67,13 +67,13 @@ public class Employee {
 		
 	}
 	
-	public Long getEmpId() {
+	public String getEmpId() {
 		return empId;
 	}
 
 
 
-	public void setEmpId(Long empId) {
+	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
 
