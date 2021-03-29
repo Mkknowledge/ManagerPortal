@@ -37,21 +37,25 @@ public class EmployeeController {
 		return employeeService.listAll();
 	}
 	
+	@PostMapping
+	public Employee create(@RequestBody Employee user) {
+		return employeeService.save(user);
+	}
 
-	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
 		
-		Employee emp = employeeService.get(id);
-				/*.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));*/
+		Employee emp = employeeService.get(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
 		
-		if (emp == null) {
-			 throw new ResourceNotFoundException("Employee", "id", id);
-		}else {
-			employeeService.delete(id);
-		}
-
+		employeeService.delete(id);
+				/*
+				 * if (emp == null) { throw new ResourceNotFoundException("Employee", "id", id);
+				 * }else { employeeService.delete(id); }
+				 */
 		return ResponseEntity.ok().build();
 	}
+	
+	
 
 }
