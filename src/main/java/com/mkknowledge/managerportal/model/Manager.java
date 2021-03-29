@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -70,11 +72,11 @@ public class Manager {
 	@JsonFormat(pattern="yyy-mm-dd")
 	private Date updated_At;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
 		joinColumns = @JoinColumn(name = "user_id"), 
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	private Set<Role> roles;
 	
 	@PrePersist
 	protected void onCreate() {

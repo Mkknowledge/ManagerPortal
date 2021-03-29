@@ -19,35 +19,20 @@ public class Role {
 	private Integer id;
 
 	//ENUM
-	@Enumerated(EnumType.STRING)
 	@Column(length = 20)
-	private ERole name;
+	private String role;
 	
 	//CONSTRUCTORS
 	public Role() {
 
 	}
 	
-	public Role(ERole name) {
-		this.name = name;
+	public String getRole() {
+		return role;
 	}
 
-	//GETTER AND SETTERS
-	public Integer getId() {
-		return id;
+	public void setRole(String role) {
+		this.role = role;
 	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public ERole getName() {
-		return name;
-	}
-
-	public void setName(ERole name) {
-		this.name = name;
-	}
-	
 	
 }
