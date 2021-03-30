@@ -28,12 +28,9 @@ public class StripeService {
 	        try {
 	            Stripe.apiKey = API_SECRET_KEY;
 	            Map<String, Object> customerParams = new HashMap<>();
-	            // add customer unique id here to track them in your web application
 	            customerParams.put("description", "Customer for " + email);
 	            customerParams.put("email", email);
 
-	            customerParams.put("source", token); // ^ obtained with Stripe.js
-	            //create a new customer
 	            Customer customer = Customer.create(customerParams);
 	            id = customer.getId();
 	        } catch (Exception ex) {
@@ -98,7 +95,7 @@ public class StripeService {
 	    }
 	    
 	    
-	    public String createCharge(String email, String token, int amount) {
+	    public String createCharge(String email, String token, Double amount) {
 	        String id = null;
 	        try {
 	            Stripe.apiKey = API_SECRET_KEY;
