@@ -29,23 +29,31 @@ public class ManagerController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	@CrossOrigin(origins = "*")
 	@GetMapping(produces = "application/json")
 	@RequestMapping({ "/manager/validateLogin" })
-	public String loginManager(HttpServletRequest request) {
+	public Manager loginManager(HttpServletRequest request) {
 		
 		String username = request.getHeader("username");
 		String password = request.getHeader("password");
-		
+		System.out.print("username" + username + "password" + password);
 		Manager mg = managerRepository.findByUsername(username);
 		
 		if(mg == null) {
-			return "User Not Found";
+			System.out.println("user not found");
+			return null;
 		}else {
-			if(mg.getUsername() == username && mg.getPassword() == password) {
-				return "SUCCESS";
+			 System.out.println("Username :::: " + mg.getUsername().trim());
+			 System.out.println("\n encoder Match :::: " + bCryptPasswordEncoder.matches(password.trim(), mg.getPassword().trim()));
+			 
+			if(mg.getUsername().trim().equals(username.trim())) {
+				System.out.println("success");
+				return mg;
 			}else {
-				return "FAILURE";
+				System.out.println("failed");
+				return null;
 			}
+			
 		}
 		
 	}

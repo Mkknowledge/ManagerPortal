@@ -23,10 +23,13 @@ public class PaymentController {
 		@PostMapping("/charge")
 	    public String chargeCard(HttpServletRequest request) throws Exception {
 	        String token = request.getHeader("token");
-	        Double amount = Double.parseDouble(request.getHeader("amount"));
+	        String amount = request.getHeader("amount");
 	        String subscriptionType = request.getHeader("subscriptionType");
+	        String email = request.getHeader("email");
 	        
-	        return stripeService.createCharge(subscriptionType, token, amount);
+	        System.out.println("token :: " + token + ":::::::amount::::::" + amount + ":::::::email::::::" + email);
+	        
+	        return null;
 	    }
 	   
 }
