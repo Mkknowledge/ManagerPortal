@@ -24,20 +24,17 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/")
 	public String login() {
 		return "Success";
 	}
 
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/employees")
 	public List<Employee> listEmployee() {
 		return employeeService.listAll();
 	}
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/employees/employee/{id}")
 	public Employee getEmployee(@PathVariable(value = "id") Long id) {
 		Employee emp = employeeService.get(id)
@@ -46,13 +43,11 @@ public class EmployeeController {
 		
 	}
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping("/employees")
 	public Employee create(@RequestBody Employee user) {
 		return employeeService.save(user);
 	}
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PutMapping("/employees/{id}")
 	public Employee updateEmployee(@PathVariable(value = "id") Long id, @RequestBody Employee empDetails) {
 
@@ -72,7 +67,6 @@ public class EmployeeController {
 		return updateEmployee;
 	}
 
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@DeleteMapping("/employees/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
 		

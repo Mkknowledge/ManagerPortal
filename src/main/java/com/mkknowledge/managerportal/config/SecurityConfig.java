@@ -3,6 +3,7 @@ package com.mkknowledge.managerportal.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,10 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.userDetailsService(userDetailsService).passwordEncoder(encodePWD());
 	}
 	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.cors();
-		http.csrf().disable();
+	/*
+	 * @Override protected void configure(HttpSecurity http) throws Exception {
+	 * http.cors(); http.csrf().disable();
+	 */
 		//URL Based Security for displaying list /employees/**
 		//Role Based only accessable to Manager /secure/**
 		/*
@@ -37,6 +38,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		 * .authorizeRequests().antMatchers("/zzel/**").hasAnyRole("MANAGER").anyRequest
 		 * ().authenticated().and() .formLogin().permitAll();
 		 */
+	/*}*/
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable().
+
+				authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()
+				.and().httpBasic();
 	}
 
 	@Bean
